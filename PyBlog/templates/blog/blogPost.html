@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+
+{% block title %}BlogPost{% endblock title %}
+{% load humanize %}
+
+
+{% block body %}
+
+<div class="container my-3 mt-5 p-3 border border-success col-md-6 text-warning bg-dark">
+    {% if user.id == object.author.id %}
+    <div>
+        <a class="btn btn-outline-primary float-right mr-2" href="{% url 'post-update' object.id %}">Update</a>
+        <a class="btn btn-outline-danger float-right mr-2" href="{% url 'post-delete' object.id %}">Delete</a>
+    </div>
+    {%else%}
+    <p class="float-right mr-2 text-success">Thanks For Watching</p>
+    {% endif %}
+    <div class="w-50">
+        <img class="rounded-circle d-block w-25 p-2 h-25" src="{{ object.author.profile.image.url }}"
+            style="max-height:200px">
+    </div>
+    <div class="blog-post">
+        <h2 class="blog-post-title">{{object.title}} </h2>
+        <hr>
+
+        <p class="blog-post-meta text-danger">{{object.date_posted | naturaltime}} by <a href="#">{{object.author}}</a></p>
+        <hr>
+
+        <p class="p-4">{{object.content}}</p>
+        <hr>
+    </div>
+
+
+
+
+    <br>
+    
+
+    <h2>Comment...</h2>
+    {% if not post.comments.all %}
+    <h6>No comments here</h6>
+    <h5><a href="{% url 'add-comment' post.pk %}">Add One</a></h5>
+    {% else %}
+    <h5 class="p-3"><a href="{% url 'add-comment' post.pk %}">Add One</a></h5>
+    <hr>
+    {% for comment in post.comments.all %}
+
+    <div>
+        <div class="col-md-4">
+            <img class="rounded-circle d-block w-50 p-2 h-25" src="{{ comment.commenter.profile.image.url }}"
+                style="max-height:200px">
+        </div>
+        <div class="col-md-8">
+            <strong>{{comment.commenter.username}} {{comment.date_added | naturaltime}}</strong>
+        </div>
+       
+    </div>
+     <div class="col-md-4"></div>
+        <div class="col-md-8">
+            {{comment.body}}
+        </div>
+    <br><br>
+    <hr>
+
+    {% endfor %}
+    <hr>
+    {% endif %}
+    
+</div>
+
+{% endblock body %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags%}
+
+
+{% block title %}Create{% endblock title %}
+
+
+{% block body %}
+
+
+<div class="container my-3 col-md-6 border border-primary">
+    <div class="d-flex justify-content-center my-3 mt-5">
+    <h1>Post Form</h1>
+    </div>
+    <hr>
+    <div class="container col-md-10 justify-content-center my-5">
+    <form method="POST">
+    {% csrf_token %}
+
+      <fieldset class="form-group">
+       <legend class="border-bottom mb-4">Post Here</legend>
+      {{form.as_p}}
+       
+      </fieldset>
+        <div class="form-group">
+          <button type="submit" class="btn btn-outline-info">Post</button>
+        </div>
+        </form>
+    
+    
+</div>
+{% endblock body %}

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags%}
+
+
+{% block title %}Login{% endblock title %}
+
+
+{% block body %}
+
+
+<div class="container my-3 col-md-6 border border-primary">
+    <div class="d-flex justify-content-center my-3 mt-5">
+     <h2>Profile</h2>
+    </div>
+    <hr>
+    <div class="container col-md-10 justify-content-center my-5">
+      <div class="container">
+        <div class="media">
+        <img class="rounded-circle mx-auto d-block w-25 p-2" src="{{user.profile.image.url}}" style="max-height:200px" >
+        <div class="media-body">
+        <tbody>
+          <tr>
+            <td class="text-secondary mx-3"> <h2 class="text-secondary mx-3"> {{user.username}} </h2></td>
+            <td class="text-secondary mx-3"><p class="text-secondary mx-3">{{user.email}} </p></td>
+          </tr>
+        </tbody>
+          
+        </div>
+        </div>
+      </div>
+    </div>
+    <form method="POST" enctype="multipart/form-data">
+    
+    {% csrf_token %}
+
+      <fieldset class="form-group">
+       <legend class="border-bottom mb-4">Profile Info</legend>
+       {{ u_form|crispy }}
+       {{ p_form|crispy }}
+      </fieldset>
+        <div class="form-group">
+          <button type="submit" class="btn btn-outline-info">Update</button>
+        </div>
+        
+    </form>
+</div>
+{% endblock body %}

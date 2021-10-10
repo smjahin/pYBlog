@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Log out{% endblock title %}
+
+
+{% block body %}
+
+
+<div class="container my-3 col-md-6 border border-primary">
+    <div class="d-flex justify-content-center my-3 mt-5">
+    <h1>Logout</h1>
+    </div>
+    <hr>
+    <div class="container col-md-10 justify-content-center my-5">
+    <h2>You Have Been Log out!</h2>
+    <div class="border-top pt-3">
+      <small class="text-muted">
+        Log in again! <a class="ml-2" href="{% url 'login' %}">Sign In</a>
+      </small>
+    </div>
+    </div>
+</div>
+{% endblock body %}
